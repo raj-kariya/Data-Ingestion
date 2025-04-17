@@ -1,8 +1,9 @@
-package com.example.app.service;
+package com.example.app.service.integration;
 
 import com.example.app.model.ColumnInfo;
 import com.example.app.model.ConnectionConfig;
 import com.example.app.model.TableInfo;
+import com.example.app.service.ClickHouseService; 
 import com.example.app.util.TestHelper;
 import org.junit.Before;
 import org.junit.Test;

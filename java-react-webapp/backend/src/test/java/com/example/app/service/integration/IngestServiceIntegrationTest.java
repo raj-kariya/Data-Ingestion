@@ -1,7 +1,10 @@
-package com.example.app.service;
+package com.example.app.service.integration;
 
 import com.example.app.model.ConnectionConfig;
 import com.example.app.model.IngestResult;
+import com.example.app.service.ClickHouseService;
+import com.example.app.service.FlatFileService;
+import com.example.app.service.IngestService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

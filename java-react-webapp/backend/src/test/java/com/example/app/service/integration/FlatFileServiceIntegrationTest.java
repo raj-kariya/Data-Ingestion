@@ -1,7 +1,8 @@
-package com.example.app.service;
+package com.example.app.service.integration;
 
 import com.example.app.model.ColumnInfo;
 import com.example.app.model.TableInfo;
+import com.example.app.service.FlatFileService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
