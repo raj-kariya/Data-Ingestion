@@ -62,14 +62,51 @@ const ClickHouseForm = ({ direction }) => {
     };
     
     const handleStartIngest = async (parameters) => {
-        setStatus('ingesting');
+        console.log('handleStartIngest called with parameters:', parameters);
+        
+        if (parameters.status === 'ingesting') {
+            console.log('Setting status to ingesting');
+            setStatus('ingesting');
+            return; // Return early - we'll update result later when process completes
+        }
+        
         try {
-            // This will be handled by IngestControls component
-            setResult(parameters.result);
-            setStatus(parameters.result.success ? 'completed' : 'error');
+            // Handle the result when process completes or errors
+            if (parameters.result) {
+                console.log('Ingest operation result:', parameters.result);
+                
+                // Store the result
+                setResult(parameters.result);
+                
+                // Determine the status based on the parameters or result
+                if (parameters.status === 'completed' || parameters.status === 'error') {
+                    console.log(`Setting status from parameters: ${parameters.status}`);
+                    setStatus(parameters.status);
+                } else if (parameters.result.status === 'completed' || parameters.result.status === 'error') {
+                    console.log(`Setting status from result.status: ${parameters.result.status}`);
+                    setStatus(parameters.result.status);
+                } else {
+                    // Fall back to success flag if status not explicitly provided
+                    const newStatus = parameters.result.success ? 'completed' : 'error';
+                    console.log(`Setting derived status based on success flag: ${newStatus}`);
+                    setStatus(newStatus);
+                }
+            } else {
+                console.warn('handleStartIngest called with no result object');
+                setStatus('error');
+                setResult({ 
+                    success: false, 
+                    message: 'No result received from ingestion process' 
+                });
+            }
         } catch (error) {
+            console.error('Error in handleStartIngest:', error);
             setStatus('error');
-            setResult({ success: false, message: `Error during ingestion: ${error.message}` });
+            setResult({ 
+                success: false, 
+                message: `Error during ingestion: ${error.message}`,
+                error: error.toString()
+            });
         }
     };
     
