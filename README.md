@@ -2,6 +2,13 @@
 
 This project is a web application that utilizes Java for the backend and ReactJS for the frontend. It is structured to separate concerns between the backend and frontend, allowing for a clean and maintainable codebase.
 
+# Demo 
+
+
+https://github.com/user-attachments/assets/7c9368ee-80ec-45a5-ab7c-acc07bd510f8
+
+
+
 ## Project Structure
 
 ```
